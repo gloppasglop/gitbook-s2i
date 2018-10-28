@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+if [ -e "/opt/app-root/etc/generate_container_user" ]; then
+  source /opt/app-root/etc/generate_container_user
+fi
+
+[ "$1" == "--debug" ] && exec /bin/bash
+
+echo "Launching gitbook..."
+cd _book
+exec  static-server --port 8080 --index index.html
